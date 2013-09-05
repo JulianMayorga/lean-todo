@@ -44,6 +44,6 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test:e2e && grunt test:unit"
   }
 }
