@@ -5,7 +5,7 @@ angular.module('leanTodoApp', [])
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'TaskCtrl'
       })
       .otherwise({
         redirectTo: '/'

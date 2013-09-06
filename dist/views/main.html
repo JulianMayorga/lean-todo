@@ -2,25 +2,24 @@
   <h1>UberTask <small>Your productivity will be over 6000!</small></h1>
 </div>
 <div class="newTask">
-  <form role="form">
+  <form ng-submit="addTask(newTask)" role="form">
     <div class="input-group">
       <label class="sr-only" for="newTask">New Task</label>
-      <input type="text" class="form-control" id="newTask" placeholder="Enter task">
+      <input type="text" ng-model="newTask" class="form-control" id="newTask" placeholder="Enter task">
       <span class="input-group-btn">
-        <button type="submit" class="btn btn-default">Add</button>
+        <button type="submit" id="new-task-btn" class="btn btn-default">Add</button>
       </span>
     </div>
   </form>
 </div>
 <hr>
 <div class="list-group taskList">
-  <div class="list-group-item" ng-repeat="thing in awesomeThings">
+  <div class="list-group-item task" ng-repeat="task in tasks">
     <div class="input-group">
-      <input type="text" class="form-control" value="{{thing}}" readonly="readonly">
+      <input type="text" class="form-control" value="{{task.text}}" readonly="readonly">
       <span class="input-group-btn">
         <button class="btn btn-default" type="button">Done!</button>
       </span>
     </div>
-    <!--<button type="button" class="btn btn-default">Done</button> {{thing}}-->
   </div>
 </div>
