@@ -1,9 +1,25 @@
-<div class="hero-unit">
-  <h1>'Allo, 'Allo!</h1>
-  <p>You now have</p>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
+<div class="page-header">
+  <h1>UberTask <small>Your productivity will be over 6000!</small></h1>
+</div>
+<div class="newTask">
+  <form role="form">
+    <div class="input-group">
+      <label class="sr-only" for="newTask">New Task</label>
+      <input type="text" class="form-control" id="newTask" placeholder="Enter task">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-default">Add</button>
+      </span>
+    </div>
+  </form>
+</div>
+<hr/>
+<div class="taskList">
+  <div class="row" ng-repeat="thing in awesomeThings">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <input type="checkbox">
+      </span>
+      <input type="text" class="form-control" readonly value="{{thing}}"></input>
+    </div>
+  </div>
 </div>
