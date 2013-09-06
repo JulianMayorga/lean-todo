@@ -13,13 +13,14 @@
   </form>
 </div>
 <hr/>
-<div class="taskList">
-  <div class="row" ng-repeat="thing in awesomeThings">
+<div class="list-group taskList">
+  <div class="list-group-item" ng-repeat="thing in awesomeThings">
     <div class="input-group">
-      <span class="input-group-addon">
-        <input type="checkbox">
+      <input type="text" class="form-control" value="{{thing}}" readonly>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Done!</button>
       </span>
-      <input type="text" class="form-control" readonly value="{{thing}}"></input>
     </div>
+    <!--<button type="button" class="btn btn-default">Done</button> {{thing}}-->
   </div>
 </div>
