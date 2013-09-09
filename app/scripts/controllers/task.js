@@ -11,4 +11,13 @@ angular.module('leanTodoApp')
       $scope.tasks.push(taskToAdd);
       $scope.newTask = '';
     };
+    $scope.doneFirst = function (task) {
+      var result;
+      if (task.done) {
+        result = 1;
+      } else {
+        result = 0;
+      }
+      return result;
+    };
   });

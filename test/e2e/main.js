@@ -30,13 +30,25 @@ describe('Lean todo app', function () {
     });
   });
 
-  describe('Toggle done: ', function () {
+  describe('Tasks list: ', function () {
     it('should mark a task as done when checked', function () {
       input('newTask').enter('do laundry');
       element('#new-task-btn').click();
       input('task.done').check();
       expect(element('.text').attr('class')).toContain('done-true');
       expect(element('.text').css('text-decoration')).toBe('line-through');
+    });
+
+    // Skip test until I figure out how to access the first element in repeater
+    xit('should put tasks that are not done first', function () {
+      input('newTask').enter('do laundry');
+      element('#new-task-btn').click();
+      input('newTask').enter('go shopping');
+      element('#new-task-btn').click();
+      input('task.done').check();
+      input('newTask').enter('study');
+      element('#new-task-btn').click();
+      expect(repeater('.text').row(0)).toEqual('do laundry');
     });
   });
 

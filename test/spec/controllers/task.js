@@ -28,4 +28,32 @@ describe('Controller: TaskCtrl', function () {
     expect(scope.newTask).toBe('');
   });
 
+  describe('Filter tasks: ', function () {
+    // Inject orderBy filter before each test
+    // https://github.com/angular/angular.js/blob/master/test/ng/filter/orderBySpec.js
+    beforeEach(inject(function($filter) {
+      scope.orderBy = $filter('orderBy');
+    }));
+
+    it('should order tasks with done tasks first', function () {
+      var tasks = [
+        {
+          text: 'not',
+          done: false
+        },
+        {
+          text: 'yes',
+          done: true
+        },
+        {
+          text: 'not done at all',
+          done: false
+        }
+      ];
+
+      var sortedTasks = scope.orderBy(tasks, scope.doneFirst);
+      expect(sortedTasks[2]).toBe(tasks[1]);
+    });
+  });
+
 });
