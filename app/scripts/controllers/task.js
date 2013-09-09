@@ -11,6 +11,10 @@ angular.module('leanTodoApp')
       $scope.tasks.push(taskToAdd);
       $scope.newTask = '';
     };
+    $scope.removeTask = function (task) {
+      var index = $scope.tasks.indexOf(task);
+      $scope.tasks.splice(index, 1);
+    };
     $scope.doneFirst = function (task) {
       var result;
       if (task.done) {

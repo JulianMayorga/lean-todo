@@ -7,15 +7,20 @@
       <label class="sr-only" for="newTask">New Task</label>
       <input type="text" ng-model="newTask" class="form-control" id="newTask" placeholder="Enter task">
       <span class="input-group-btn">
-        <button type="submit" id="new-task-btn" class="btn btn-default">Add</button>
+        <button type="submit" id="new-task-btn" class="btn btn-primary">Add</button>
       </span>
     </div>
   </form>
 </div>
 <hr/>
-<ul class="list-group taskList">
-  <li class="list-group-item task" ng-repeat="task in tasks | orderBy:doneFirst">
+<div class="taskList">
+  <div class="input-group task" ng-repeat="task in tasks | orderBy:doneFirst">
+	  <div class="input-group-addon">
     <input type="checkbox" class="done" ng-model="task.done">
-    <span class="text ng-class: done-{{task.done}}">{{task.text}}</span>
-  </li>
+    </div>
+    <span class="text form-control ng-class: done-{{task.done}}">{{task.text}}</span>
+    <a type="button" ng-click="removeTask(task)" class="remove-task btn btn-danger input-group-addon">
+	      <span class="glyphicon glyphicon-remove"></span>
+      </a>
+    </div>
 </div>

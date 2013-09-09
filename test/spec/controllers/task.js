@@ -16,16 +16,18 @@ describe('Controller: TaskCtrl', function () {
     });
   }));
 
-  it('should be able to add a task to the list', function () {
-    expect(scope.tasks.length).toBe(0);
-    scope.addTask('do laundry');
-    expect(scope.tasks.length).toBe(1);
-    expect(scope.tasks[0].text).toBe('do laundry');
-  });
+  describe('Add task: ', function () {
+    it('should be able to add a task to the list', function () {
+      expect(scope.tasks.length).toBe(0);
+      scope.addTask('do laundry');
+      expect(scope.tasks.length).toBe(1);
+      expect(scope.tasks[0].text).toBe('do laundry');
+    });
 
-  it('should clean the newTask value after adding a task', function () {
-    scope.addTask('do laundry');
-    expect(scope.newTask).toBe('');
+    it('should clean the newTask value after adding a task', function () {
+      scope.addTask('do laundry');
+      expect(scope.newTask).toBe('');
+    });
   });
 
   describe('Filter tasks: ', function () {
@@ -53,6 +55,17 @@ describe('Controller: TaskCtrl', function () {
 
       var sortedTasks = scope.orderBy(tasks, scope.doneFirst);
       expect(sortedTasks[2]).toBe(tasks[1]);
+    });
+  });
+
+  describe('Remove task: ', function () {
+    it('should remove a task', function () {
+      scope.addTask('do laundry');
+      scope.addTask('go shopping');
+      scope.addTask('study');
+      expect(scope.tasks.length).toBe(3);
+      scope.removeTask(scope.tasks[0]);
+      expect(scope.tasks.length).toBe(2);
     });
   });
 

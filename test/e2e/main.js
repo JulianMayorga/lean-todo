@@ -10,7 +10,7 @@ describe('Lean todo app', function () {
     expect(browser().location().url()).toBe('/');
   });
 
-  describe('Add task :', function () {
+  describe('Add task:', function () {
     it('should add a task to the list', function () {
       expect(element('.task').count()).toEqual(0);
       input('newTask').enter('do laundry');
@@ -49,6 +49,17 @@ describe('Lean todo app', function () {
       input('newTask').enter('study');
       element('#new-task-btn').click();
       expect(repeater('.text').row(0)).toEqual('do laundry');
+    });
+  });
+
+  describe('Delete tasks: ', function () {
+
+    it('should remove a task when delete is clicked', function () {
+      input('newTask').enter('do laundry');
+      element('#new-task-btn').click();
+      expect(element('.task').count()).toEqual(1);
+      element('.remove-task').click();
+      expect(element('.task').count()).toEqual(0);
     });
   });
 
