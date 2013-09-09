@@ -13,13 +13,9 @@
   </form>
 </div>
 <hr/>
-<div class="list-group taskList">
-  <div class="list-group-item task" ng-repeat="task in tasks">
-    <div class="input-group">
-      <input type="text" class="form-control" value="{{task.text}}" readonly>
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Done!</button>
-      </span>
-    </div>
+<ul class="list-group taskList">
+  <li class="list-group-item task" ng-repeat="task in tasks">
+    <input type="checkbox" class="done" ng-model="task.done">
+    <span class="text ng-class: done-{{task.done}}">{{task.text}}</span>
   </div>
 </div>
