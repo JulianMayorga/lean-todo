@@ -66,4 +66,21 @@ describe('Service: TaskList', function () {
     expect(TaskList.get(0).text).toBe('do something else');
   });
 
+  it('should be able to retrieve all tasks', function () {
+    var task = {
+      text: 'do something',
+      done: false
+    };
+    var anotherTask = {
+      text: 'do something else',
+      done: false
+    };
+    var all_tasks = [];
+
+    TaskList.add(task);
+    TaskList.add(anotherTask);
+    all_tasks = TaskList.getAll();
+    expect(all_tasks.length).toBe(TaskList.size());
+  });
+
 });

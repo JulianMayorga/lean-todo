@@ -20,6 +20,9 @@ angular.module('leanTodoApp')
       },
       remove: function (task) {
         tasks.splice(tasks.indexOf(task), 1);
+      },
+      getAll: function () {
+        return tasks;
       }
     };
   });
