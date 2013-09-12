@@ -5,23 +5,25 @@ describe('Controller: TaskCtrl', function () {
   // load the controller's module
   beforeEach(module('leanTodoApp'));
 
-  var TaskCtrl,
-    scope;
+  var TaskCtrl, scope;
+  var TaskStub = jasmine.createSpyObj('TaskStub', ['query', 'save', 'remove', 'get']);
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
     TaskCtrl = $controller('TaskCtrl', {
-      $scope: scope
+      $scope: scope,
+      // Ver de que se trata $provide
+      Task: TaskStub
     });
   }));
 
   describe('Add task: ', function () {
     it('should be able to add a task to the list', function () {
-      expect(scope.tasks.length).toBe(0);
+      // Es suficiente verificar que se llamaron los metodos de Task?
+      expect(TaskStub.query).toHaveBeenCalled();
       scope.addTask('do laundry');
-      expect(scope.tasks.length).toBe(1);
-      expect(scope.tasks[0].text).toBe('do laundry');
+      expect(TaskStub.save).toHaveBeenCalled();
     });
 
     it('should clean the newTask value after adding a task', function () {
@@ -60,12 +62,13 @@ describe('Controller: TaskCtrl', function () {
 
   describe('Remove task: ', function () {
     it('should remove a task', function () {
-      scope.addTask('do laundry');
-      scope.addTask('go shopping');
-      scope.addTask('study');
-      expect(scope.tasks.length).toBe(3);
-      scope.removeTask(scope.tasks[0]);
-      expect(scope.tasks.length).toBe(2);
+      var task = {
+        text: 'do something',
+        done: false
+      };
+      scope.addTask(task); // Es necesario agregarla? Se podria usar el id de una existente?
+      scope.removeTask(task);
+      expect(TaskStub.remove).toHaveBeenCalled();
     });
   });
 

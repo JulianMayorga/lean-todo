@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('leanTodoApp', [])
+angular.module('leanTodoApp', ['ngResource'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

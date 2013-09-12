@@ -1,23 +1,22 @@
 'use strict';
 
 angular.module('leanTodoApp')
-  .controller('TaskCtrl', function ($scope, TaskList) {
-    $scope.tasks = TaskList.getAll();
+  .controller('TaskCtrl', function ($scope, Task) {
+    $scope.tasks = Task.query();
     $scope.addTask = function (text) {
       var taskToAdd = {
 	      text: text,
 	      done: false
       };
-      TaskList.add(taskToAdd);
-      // synchronize tasks in scope with TaskList
-      $scope.tasks = TaskList.getAll();
+      Task.save(taskToAdd);
+      // synchronize tasks in scope with Task
+      $scope.tasks = Task.query();
       $scope.newTask = '';
     };
     $scope.removeTask = function (task) {
-      var index = $scope.tasks.indexOf(task);
-      TaskList.remove(index);
-      // synchronize tasks in scope with TaskList
-      $scope.tasks = TaskList.getAll();
+      Task.remove(task.id);
+      // synchronize tasks in scope with Task
+      $scope.tasks = Task.query();
     };
     $scope.doneFirst = function (task) {
       var result;
