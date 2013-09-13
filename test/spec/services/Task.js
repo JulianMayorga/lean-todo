@@ -6,7 +6,7 @@ describe('Service: Task', function () {
   beforeEach(module('leanTodoApp'));
 
   // Constants
-  var API_URL = 'api/task';
+  var API_URL = '/task';
 
   // instantiate service
   var Task, httpBackend, resource, callback;
@@ -85,5 +85,20 @@ describe('Service: Task', function () {
     expect(all_tasks[0].text).toBe(task.text);
     expect(all_tasks[1].text).toBe(anotherTask.text);
   });
+
+  it('should be able to mark a not done task as done', function () {
+
+    httpBackend.when('GET', API_URL + '/1').respond({taskId: 1, text: 'do something', done: true});
+    var extractedTask = Task.get({taskId: 1});
+    httpBackend.flush();
+    expect(extractedTask.done).toBe(true);
+
+    httpBackend.expect('PUT', API_URL + '/1', '{"taskId":1,"text":"do something","done":false}').respond({taskId: 1, text: 'do something', done: false});
+    Task.toggleDone(extractedTask);
+    httpBackend.flush();
+
+    expect(extractedTask.done).toBe(false);
+  });
+
 
 });

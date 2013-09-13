@@ -1,6 +1,7 @@
 <div class="page-header">
   <h1>UberTask <small>Your productivity will be over 6000!</small></h1>
 </div>
+
 <div class="newTask">
   <form ng-submit="addTask(newTask)" role="form">
     <div class="input-group">
@@ -12,15 +13,17 @@
     </div>
   </form>
 </div>
+
 <hr/>
+
 <div class="taskList">
-  <div class="input-group task" ng-repeat="task in tasks | orderBy:doneFirst">
-	  <div class="input-group-addon">
-    <input type="checkbox" class="done" ng-model="task.done">
-    </div>
+  <div id="task-{{$index}}" class="input-group task" ng-repeat="task in tasks | orderBy:doneFirst">
+    <a type="button" ng-click="toggleDone(task)" class="toggle-done-btn btn btn-info input-group-addon">
+      <span class="glyphicon glyphicon-unchecked"></span>
+    </a>
     <span class="text form-control ng-class: done-{{task.done}}">{{task.text}}</span>
     <a type="button" ng-click="removeTask(task)" class="remove-task btn btn-danger input-group-addon">
-	      <span class="glyphicon glyphicon-remove"></span>
-      </a>
-    </div>
+      <span class="glyphicon glyphicon-remove"></span>
+    </a>
+  </div>
 </div>

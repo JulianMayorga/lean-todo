@@ -6,7 +6,7 @@ describe('Controller: TaskCtrl', function () {
   beforeEach(module('leanTodoApp'));
 
   var TaskCtrl, scope;
-  var TaskStub = jasmine.createSpyObj('TaskStub', ['query', 'save', 'remove', 'get']);
+  var TaskStub = jasmine.createSpyObj('TaskStub', ['query', 'save', 'remove', 'get', 'toggleDone']);
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
@@ -69,6 +69,19 @@ describe('Controller: TaskCtrl', function () {
       scope.addTask(task); // Es necesario agregarla? Se podria usar el id de una existente?
       scope.removeTask(task);
       expect(TaskStub.remove).toHaveBeenCalled();
+    });
+  });
+
+  describe('Edit task: ', function () {
+
+    it('should be able to mark a task as done', function () {
+      var task = {
+        text: 'do something',
+        done: false
+      };
+      scope.addTask(task);
+      scope.toggleDone(task);
+      expect(TaskStub.toggleDone).toHaveBeenCalled();
     });
   });
 

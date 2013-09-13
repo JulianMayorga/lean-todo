@@ -12,11 +12,11 @@ describe('Lean todo app', function () {
 
   describe('Add task:', function () {
     it('should add a task to the list', function () {
-      expect(element('.task').count()).toEqual(0);
+      expect(element('.task').count()).toEqual(0); //FakeBackend has 0 tasks
       input('newTask').enter('do laundry');
       element('#new-task-btn').click();
       expect(element('.task').count()).toEqual(1);
-      expect(element('.task .text').text()).toEqual('do laundry');
+      expect(element('#task-0').text()).toContain('do laundry'); // Task index is 1 because the not done task has index 2
     });
 
     it('should start with an empty task input', function () {
@@ -34,21 +34,20 @@ describe('Lean todo app', function () {
     it('should mark a task as done when checked', function () {
       input('newTask').enter('do laundry');
       element('#new-task-btn').click();
-      input('task.done').check();
-      expect(element('.text').attr('class')).toContain('done-true');
-      expect(element('.text').css('text-decoration')).toBe('line-through');
+      element('#task-0 .toggle-done-btn').click();
+      expect(element('#task-0 .text').attr('class')).toContain('done-true');
+      expect(element('#task-0 .text').css('text-decoration')).toBe('line-through');
     });
 
-    // Skip test until I figure out how to access the first element in repeater
-    xit('should put tasks that are not done first', function () {
-      input('newTask').enter('do laundry');
-      element('#new-task-btn').click();
+    it('should put tasks that are not done first', function () {
       input('newTask').enter('go shopping');
       element('#new-task-btn').click();
-      input('task.done').check();
+      element('#task-0 .toggle-done-btn').click();
+      expect(element('#task-0 span').text()).toEqual('go shopping');
       input('newTask').enter('study');
       element('#new-task-btn').click();
-      expect(repeater('.text').row(0)).toEqual('do laundry');
+      // Now the first element should be study because it is not done
+      expect(element('#task-0 span').text()).toEqual('study');
     });
   });
 
