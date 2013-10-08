@@ -15,7 +15,7 @@ angular.module('leanTodoApp')
     };
 
     $scope.removeTask = function (task) {
-      Task.remove({taskId: task._id}, loadTasks);
+      Task.remove({taskId: task.id}, loadTasks);
     };
 
     $scope.toggleDone = function (task) {

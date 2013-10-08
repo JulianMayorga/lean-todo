@@ -13,7 +13,7 @@ leanTodoAppDev.run(function ($httpBackend) {
 
   $httpBackend.whenPOST('/task').respond(function(method, url, data, headers) {
     var task = angular.fromJson(data);
-    task._id = new Date().getTime();
+    task.id = new Date().getTime();
     tasks.push(task);
     return [200, 'SUCCESS'];
   });
@@ -22,7 +22,7 @@ leanTodoAppDev.run(function ($httpBackend) {
     var newTask = angular.fromJson(data);
     var taskToUpdateIndex;
     tasks.forEach(function (element, index, array) {
-      if (element._id === newTask._id) {
+      if (element.id === newTask.id) {
         taskToUpdateIndex = index;
       }
     });
@@ -43,7 +43,7 @@ leanTodoAppDev.run(function ($httpBackend) {
     var id = parts[1];
     var taskIndex;
     tasks.forEach(function (element, index, array) {
-      if (element._id == id) {
+      if (element.id == id) {
         taskIndex = index;
       }
     });
