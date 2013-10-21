@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('leanTodoApp', ['ngResource'])
+angular.module('leanTodoApp', ['ngResource', 'ngCookies'])
 .config(function ($routeProvider, $httpProvider) {
 	$routeProvider
 	.when('/', {
